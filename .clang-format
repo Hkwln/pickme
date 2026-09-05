@@ -1,0 +1,8 @@
+BasedOnStyle: GOOGLE
+BreakBeforeBraces: Linux   # K&R/Linux Stil
+IndentWidth: 4
+TabWidth: 4
+UseTab: Never
+ColumnLimit: 80
+AllowShortBlocksOnASingleLine: Never
+AllowShortFunctionsOnASingleLine: None
