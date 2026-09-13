@@ -1,11 +1,11 @@
 
-#include "fuzzy.h"
+#include "../include/fuzzy.h"
 
 #include <stddef.h>
 #include <stdlib.h>
 #include <string.h>
 
-#include "logic.h"
+#include "../include/logic.h"
 #define MAXDISTANCE 20
 
 // using levenstein to calc distance -> word with least distance wins

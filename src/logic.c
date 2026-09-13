@@ -1,5 +1,5 @@
 
-#include "logic.h"
+#include "../include/logic.h"
 
 #include <dirent.h>
 #include <linux/limits.h>
@@ -41,7 +41,7 @@ void append_word(char* word, char* exec, str_list* l)
 
 char* get_word(str_list* l, size_t index)
 {
-    return (index >= 0 && (l->len > index)) ? l->item[index] : NULL;
+    return (l->len > index) ? l->item[index] : NULL;
 }
 static int is_desktop_file(char* word)
 {
@@ -71,7 +71,8 @@ void append_name_exec(str_list* l, char* entry)
         } else if (strncmp(data, "Exec=", 5) == 0) {
             // Exec=
             snprintf(exec, sizeof exec, "%s", data + 5);
-            char* codes = strstr(exec, " %");
+            char* codes = strstr(exec, " %"); /* trailing %U %F %f %u ... */
+            if (codes) *codes = '\0';
         } else if (strncmp(data, "NoDisplay=true", 14) == 0 ||
                    strncmp(data, "Hidden=true", 11) == 0 ||
                    strncmp(data, "Terminal=true", 13) == 0 ||
@@ -91,6 +92,8 @@ void append_name_exec(str_list* l, char* entry)
 void file_listing(str_list* l)
 {
     char path_dir[] = "/usr/share/applications";
+    char path_dir2[] = "~/.config/pickme/";  // TODO: add these two to the scan
+    char path_dir3[] = "~/.local/share/applications/";
     char path[PATH_MAX];
     DIR* dir = opendir(path_dir);
     if (!dir) {
@@ -106,6 +109,7 @@ void file_listing(str_list* l)
     }
     closedir(dir);
 }
+
 void launch(char* exec_cmd)
 {
     pid_t pid = fork();

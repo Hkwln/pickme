@@ -1,17 +1,36 @@
-# pickme - minimal applauncher
+# pickme - a minimal applauncher
 
-## Why this is for you
+## status
+
+![Status](https://img.shields.io/badge/Status-Not%20Yet%20Ready-red)
+
+## Why this is great
 
 1. pure C: only libawayland + cairo
-   no gtk4 everything under the launcher's control
+2. Wayland only
 
 ## how to install
 
-- install cairo and libawayland
-- make
-- launch
+- clone repository
+- cd into repo
+- install dependencies, have a wayland environment:
+
+```sh
+echo $XDG_SESSION_TYPE #should return wayland
+sudo pacman -S cairo
+```
+
+- make release
 
 ## how to use
+
+1. command line/logic modus:
+
+```sh
+./pickme --logic
+```
+
+1.
 
 ```sh
 ./pickme
@@ -19,6 +38,22 @@
 
 ## features
 
-- you can manually add applications via sh script e.g my_name.sh make it executable and it could be found by the name you gave the .sh script put it in .config/pickme/my_name.sh
+- you can manually add applications via ~/.config/pickme/my_application.desktop,
+  if something is not captured by auto detecting
+- let the window float in hyprland by adding something like this to the lua config:
 
-### remember I only tested it on my system(artixlinux - hyprland) there could be issues in other linux distros and especially other wayland compositors
+```lua
+hl.window_rule({
+  name = "pickme-launcher",
+  match = { class = "^(pickme)$" },
+  float = true,
+  center = true,
+  size = "600 400",
+}
+```
+
+### NOTE
+
+I currently have only tested it on my system(artix-linux - hyprland),
+there could be issues in other wayland de's like gnome, kde, cosmic ...,
+feel free to tell me if it works on your setup

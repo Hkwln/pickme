@@ -4,6 +4,11 @@
 #include "fuzzy.h"
 #include "unity.h"
 
+/* fuzzy.c calls get_word() from logic.c. Ceedling links only the source
+ * matching this test's name, so we link the generated mock instead of the
+ * real logic module (nothing here calls get_word, it only needs to exist). */
+#include "mock_logic.h"
+
 void setUp(void)
 {
 }

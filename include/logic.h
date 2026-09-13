@@ -20,5 +20,5 @@ void append_word(char* word, char* exec, str_list* l);
 
 char* get_word(str_list* l, size_t index);
 
-void launch_program(char* program_name);
+void launch(char* exec_cmd);
 #endif  // LOGIC_H

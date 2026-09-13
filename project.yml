@@ -102,6 +102,8 @@
   :source:
     - src/**
   :include:
+    - include/** # headers moved out of src/
+    - build/protocols/** # generated xdg-shell-client-protocol.h
     - src/** # In simple projects, this entry often duplicates :source
   :support:
     - test/support
@@ -111,7 +113,10 @@
 # and release collections. Usually it's better to use paths and let
 # Ceedling do the work for you!
 :files:
-  :test: []
+  :test:
+    # ui.c needs a live compositor, so test_ui is a placeholder; excluding it
+    # keeps the unit-test builds free of wayland-client/xdg-shell link deps.
+    - -:test/test_ui.c
   :source: []
 
 # Compilation symbols to be injected into builds
