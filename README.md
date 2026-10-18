@@ -57,3 +57,15 @@ hl.window_rule({
 I currently have only tested it on my system(artix-linux - hyprland),
 there could be issues in other wayland de's like gnome, kde, cosmic ...,
 feel free to tell me if it works on your setup
+
+## contributing
+
+would be great if you help me add some test's, there are currently to few
+I am using ceedling with unity, you could just edit ./test/test\_\*.c
+create a pull request.
+You could test your work with:
+
+```sh
+ceedling test:fuzzy #if you addded something to fuzzy module
+make test # or just type ceedling to test all
+```

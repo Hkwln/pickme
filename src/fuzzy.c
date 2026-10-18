@@ -4,11 +4,17 @@
 #include <stddef.h>
 #include <stdlib.h>
 #include <string.h>
+#include <strings.h>
 
 #include "../include/logic.h"
 #define MAXDISTANCE 20
+#define _GNU_SOURCE
 
 // using levenstein to calc distance -> word with least distance wins
+// FIX: ich muss auf jeden fall noch hier irgendwas verändern, vermutlich
+// einfach immer die größe 1:1 vergleichen statt mit dem ganzen text oder den
+// nächst matchenden inhalt suchen, wenn ich browser eingebe sollte Zen browser
+// herauskommen und nicht Piper!!!!
 size_t levenshtein_distance(char* s, char* t)
 {
     size_t n = strlen(s), m = strlen(t);
@@ -40,21 +46,28 @@ size_t levenshtein_distance(char* s, char* t)
 
 /* XXX: remember to free() the returned word and to free the dictonary
  * */
-void* find_near_match(char* input, str_list* dictonary)
+char* find_near_match(char* input, str_list* dictionary)
 {
-    size_t d = 0;
-    char* word = get_word(dictonary, d++);
+    char* best_word = NULL;
     char* current_smallest = malloc(50);
     current_smallest[0] = '\0';
-    size_t smallest = MAXDISTANCE;
-    size_t tmp = 0;
-    while (word != NULL) {
-        tmp = levenshtein_distance(input, word);
-        // normally i would use a if for this, but this time we use ternary just
-        // for fun
-        smallest =
-            tmp < smallest ? (strcpy(current_smallest, word), tmp) : smallest;
-        word = get_word(dictonary, d++);
+    long best = (long)MAXDISTANCE;
+    size_t d = 0;
+    char* word;
+    while ((word = get_word(dictionary, d++)) != NULL) {
+        long score = levenshtein_distance(input, word);
+        // INFO: add prefix  and a substring bonux :)
+        if (strncasecmp(word, input, strlen(input)) == 0) {
+            score -= 200;
+        }
+        if (strcasestr(word, input) != NULL) {
+            score -= 100;  // substring match = huge bonus
+        }
+        if (score < best) {
+            best = score;
+            free(best_word);
+            best_word = strdup(word);
+        }
     }
-    return current_smallest;
+    return best_word ? best_word : strdup("");
 }
