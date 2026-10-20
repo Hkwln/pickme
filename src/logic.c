@@ -78,7 +78,7 @@ void append_name_exec(str_list* l, char* entry)
         printf("failed to read file\n");
         exit(EXIT_FAILURE);
     }
-    char data[1024], name[512] = "", exec[512] = "";
+    char data[500], name[512] = "", exec[512] = "";
     name[0] = '\0';
     exec[0] = '\0';
     bool in_main = 0;
@@ -142,6 +142,7 @@ void file_listing(str_list* l)
 
 void on_key(enum key_action action, const char* utf8)
 {
+    (void)utf8;
     if (dict == NULL) {
         fprintf(stderr, "error initialize the dictionary first");
         return;
