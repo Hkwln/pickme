@@ -2,7 +2,7 @@
 
 ## status
 
-![Status](https://img.shields.io/badge/Status-Not%20Yet%20Ready-red)
+![Status](https://img.shields.io/badge/Status-In%20Testing%20Phase-yellow)
 
 ## Why this is great
 

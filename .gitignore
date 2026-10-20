@@ -3,7 +3,8 @@
 /build/
 /bin/
 /learn/
-.codewhale
+
+.codewhale 
 
 # But reserve the artifacts/ subdirectory for revision control.
 # Ceedling's notion of artifacts includes reports or release binaries you *may* want to revision. 

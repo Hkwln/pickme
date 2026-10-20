@@ -20,11 +20,7 @@ static void print_help(void)
 /* Old text-only test path: pipe one line in, get the closest match out. */
 static int run_text_mode(void)
 {
-    str_list* dict = malloc(sizeof(str_list));
-    if (dict == NULL) return 1;
-    sl_init(dict);
-    file_listing(dict);
-
+    str_list* dict = logic_init();
     char* input = NULL;
     size_t len = 0;
     if (getline(&input, &len, stdin) < 0) {
@@ -60,6 +56,7 @@ int main(int argc, char** argv)
     if (!use_ui) return run_text_mode();
 
     if (connect_display() != 0) return 1;
+    logic_init();
     int rc = run_ui();
     cleanup_ui();
     return rc;
