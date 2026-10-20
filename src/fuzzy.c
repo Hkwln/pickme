@@ -11,11 +11,7 @@
 #define _GNU_SOURCE
 
 // using levenstein to calc distance -> word with least distance wins
-// FIX: ich muss auf jeden fall noch hier irgendwas verändern, vermutlich
-// einfach immer die größe 1:1 vergleichen statt mit dem ganzen text oder den
-// nächst matchenden inhalt suchen, wenn ich browser eingebe sollte Zen browser
-// herauskommen und nicht Piper!!!!
-size_t levenshtein_distance(char* s, char* t)
+size_t levenshtein_distance(const char* s, const char* t)
 {
     size_t n = strlen(s), m = strlen(t);
     size_t* prev = malloc((m + 1) * sizeof(*prev));
@@ -45,8 +41,10 @@ size_t levenshtein_distance(char* s, char* t)
 }
 
 /* XXX: remember to free() the returned word and to free the dictonary
- * */
-char* find_near_match(char* input, str_list* dictionary)
+ *  INFO: this works, but i want to change the interface to:
+ *  search(const char* input, str_list * dictionary, size_t hits, size_t
+ *  count_hits) where hits[0] is the number in the dictionary*/
+char* find_near_match(const char* input, str_list* dictionary)
 {
     char* best_word = NULL;
     char* current_smallest = malloc(50);

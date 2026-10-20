@@ -9,6 +9,12 @@
 1. pure C: only libawayland + cairo
 2. Wayland only
 
+### short Ai-disclaimer
+
+Currently the UI is fully done with ai, because currently my knowledge of keyboard inputs and wayland
+is not enough, aim is to later write it by myself :).
+The rest is fully written by me, every line.
+
 ## how to install
 
 - clone repository
@@ -44,12 +50,12 @@ sudo pacman -S cairo
 
 ```lua
 hl.window_rule({
-  name = "pickme-launcher",
-  match = { class = "^(pickme)$" },
-  float = true,
-  center = true,
-  size = "600 400",
-}
+ name = "pickme-float",
+ match = { class = "^(pickme)$" },
+ float = true,
+ center = true,
+ size = "600 400",
+})
 ```
 
 ### NOTE
@@ -60,7 +66,7 @@ feel free to tell me if it works on your setup
 
 ## contributing
 
-would be great if you help me add some test's, there are currently to few
+It would be great if you help me add some test's, there are currently to few
 I am using ceedling with unity, you could just edit ./test/test\_\*.c
 create a pull request.
 You could test your work with:
