@@ -8,5 +8,6 @@
 
 size_t levenshtein_distance(const char* s, const char* t);
 char* find_near_match(const char* input, str_list* dictonary);
-
+size_t search(const char* input, str_list* dictionary, size_t hits[],
+              size_t count_hits);
 #endif  // FUZZY_SEACH_H

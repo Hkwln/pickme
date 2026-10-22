@@ -13,9 +13,11 @@ void setUp(void)
 void tearDown(void)
 {
 }
-/* TODO: more test's*/
+
 void test_bin_search(void)
 {
+    int null_test[2] = {0, 0};
+    TEST_ASSERT_TRUE(0 == bin_search(null_test, 0, 20));
     int test[6] = {100, 45, 33, 29, 15, 5};
     size_t res = bin_search(test, 6, 36);
     printf("%zu\n", res);

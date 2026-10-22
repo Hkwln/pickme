@@ -17,7 +17,7 @@
 static str_list* dict;
 static size_t hits[32];
 static char* shown[32];
-static size_t shown_n;
+static size_t shown_n = 0;
 
 str_list* logic_init()
 {
@@ -154,7 +154,7 @@ void on_key(enum key_action action, const char* utf8)
         case ACTION_CHAR:
         case ACTION_BACKSPACE: {
 // INFO: this is just temporary until I design the search function
-#if 1
+#if 0
             char* m = find_near_match(input_query(), dict);
             free(shown[0]);
             shown[0] = m;
@@ -167,6 +167,12 @@ void on_key(enum key_action action, const char* utf8)
                     break;
                 }
 #endif
+            shown_n = search(input_query(), dict, hits,
+                             sizeof hits / sizeof hits[0]);
+            // parse  hits into shown
+            for (size_t i = 0; i < shown_n; i++) {
+                shown[i] = dict->item[hits[i]];
+            }
             ui_set_list(shown, (int)shown_n);
             break;
         }
